@@ -1,0 +1,51 @@
+[
+    {
+        "id":1,
+        "Aplicativo":"GoAnywhere",
+        "Descripcion":"Several Fixes Available in GoAnywhere MFT 6.1.6",
+        "Texto":"",
+         "url": "/goanywhere"
+
+    },
+    {
+        "id":2,
+        "Aplicativo":"Enforcive",
+        "Descripcion":"Aplicacion de PTF",
+        "Texto":"",
+        "url": "/Enforcive"
+    
+    }
+    ,
+    {
+        "id":3,
+        "Aplicativo":"Enforcive",
+        "Descripcion":"Aplicacion de PTF",
+        "Texto":"",
+        "url": "/Enforcive"
+
+    },
+    {
+        "id":4,
+        "Aplicativo":"Enforcive",
+        "Descripcion":"Aplicacion de PTF",
+        "Texto":"",
+        "url": "/Enforcive"
+
+    },
+    {
+        "id":5,
+        "Aplicativo":"Enforcive",
+        "Descripcion":"Aplicacion de PTF",
+        "Texto":"",
+        "url": "/Enforcive"
+
+    },
+    {
+        "id":6,
+        "Aplicativo":"Enforcive",
+        "Descripcion":"Aplicacion de PTF",
+        "Texto":"",
+        "url": "/Enforcive"
+
+    }
+]
