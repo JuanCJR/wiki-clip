@@ -1,19 +1,44 @@
 import React, { Component } from 'react'
-import { Card, Table, Container, Row, Col, ListGroup } from 'react-bootstrap'
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
-import ItemBD from './itemBD';
-import ItemKB from './ItemKB';
-
+import ItemBD from './itemBD.json'
+import { Route } from 'react-router-dom'
+import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap'
+import ItemListKB from './ItemListKB'
+import ItemKBPage from './ItemKBPage'
+import NavBar from '../NavBar'
 export default class KnowedgeBase extends Component {
+
+    state = {
+        items: ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
+        nroItem: 7
+    }
+
+
+
+    nextItems = () => {
+        this.setState({
+            items: ItemBD.slice(this.state.nroItem, [this.state.nroItem + 7]),
+            nroItem: this.state.nroItem + 7
+        })
+
+    }
+
+    beforeItems = () => {
+        this.setState({
+            items: ItemBD.slice(this.state.nroItem - 7, [this.state.nroItem]),
+            nroItem: this.state.nroItem - 7
+        })
+    }
+
+
     render() {
         return (
+
             <Card className="">
                 <Card.Header><h1>Base de Conocimientos</h1></Card.Header>
-                <Container className="m-0 p-0 mw-100 ">
+                <Container className="m-0 p-0 mw-100" style={{ height: "30rem" }}>
                     <Row className="m-0 mw-100 " >
-                        <Col className="p-0 m-0" style={{ width: "12rem", flexGrow:"0" }}>
-                            <Card className="m-0 p-0" style={{ width: "12rem", height: "100%"}}>
+                        <Col className="p-0 m-0" style={{ width: "12rem", flexGrow: "0" }}>
+                            <Card className="m-0 p-0" style={{ width: "11rem", height: "100%" }}>
                                 <ListGroup>
                                     <ListGroup.Item><a href="/">Aldon</a></ListGroup.Item>
                                     <ListGroup.Item><a href="/">Enforcive</a></ListGroup.Item>
@@ -24,34 +49,71 @@ export default class KnowedgeBase extends Component {
                                 </ListGroup>
                             </Card>
                         </Col>
-                        <Col className="p-0 m-0" style={{width:"80rem", flexGrow:"0" }}>
-                            <Card classname="p-0 m-0" style={{width:"73rem" }}>
 
+                        <Col className="p-0 m-0" style={{ width: "80rem", flexGrow: "0" }}>
 
-                                <Table striped bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Descripcion</th>
-                                            <th>Aplicativo</th>
-                                        </tr>
-                                    </thead>
+                            <ItemListKB
+                                nextItems={this.nextItems}
+                                beforeItems={this.beforeItems}
+                                items={this.state.items}
 
-                                    <ItemKB ItemBD={ItemBD}></ItemKB>
-                                    
-                                </Table>
+                            ></ItemListKB>
 
-                                <Card.Footer>
-                                    <ButtonGroup className="text-rigth">
-                                        <Button variant="outline-primary">Anterior</Button>
-                                        <Button variant="outline-primary">Siguiente</Button>
-                                    </ButtonGroup>
-                                </Card.Footer>
-                            </Card>
                         </Col>
                     </Row>
                 </Container>
-            </Card>
+                </Card>
+
         )
-    }
+    }//.
+
+
+    kbRouter = ({ match }) => {
+
+        const url = [
+            {
+                id: 1,
+                url: match.url + "/GoAnywhere"
+            },
+            {
+                id: 2,
+                url: match.url + "/Presto"
+            },
+            {
+                id: 3,
+                url: match.url + "/Enforcive"
+            },
+            {
+                id: 4,
+                url: match.url + "/Aldon"
+            },
+            {
+                id: 5,
+                url: match.url + "/X-Analysis"
+            }
+        ]
+        const UrlConfirm = url.find(url => url.url = match.url + "/GoAnywhere");
+
+
+        return <div>
+            {console.log(UrlConfirm)}
+            {url.map(url =>
+                <Route path={url.url} component={this.ItemKBPage} key={url.id}></Route>
+            )}
+
+
+        </div>
+    }//.
+
+
+    ItemKBPage = ({ match }) => {
+
+        return (
+            
+                
+                <ItemKBPage></ItemKBPage>
+           
+        )
+    }//.
+
 }

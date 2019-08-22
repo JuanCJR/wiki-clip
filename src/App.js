@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import NavBar from './components/NavBar';
 import Dashboard from './components/Dashboard';
 import KnowedgeBase from './components/KnowedgeBase/KnowedgeBase';
-
+import ItemKBPage from './components/KnowedgeBase/ItemKBPage'
 
 //importaciones de pruebas
 
@@ -15,20 +15,21 @@ class App extends Component {
   state = {
 
 
+
   }
 
 
 
   render() {
     return (
-
       //Enrutamiento de aplicacion
-      <Router>
+      <div>
         <Route exact path="/" component={this.Home}></Route>
         <Route path="/dashboard" component={this.Dashboard}></Route>
-        <Route path="/test" component={this.Test}></Route>
         <Route path="/KnowedgeBase" component={this.KB}></Route>
-      </Router>
+        <Route path="/KnowedgeBaseItem" component={this.kbRouter}></Route>
+            
+             </div>
 
 
     );
@@ -66,21 +67,57 @@ class App extends Component {
   }//.
 
 
-  KB(){
-    return(
+  KB = ({ match }) => {
+
+    return (
       <div>
         <NavBar></NavBar>
         <KnowedgeBase></KnowedgeBase>
+
+        {/*<a href={`${match.url}/prueba`}
+        >aaaaaaaaaaaaa</a>
+
+        <Route exact path={`${match.url}/prueba`} component={this.Test}></Route>*/}
+
+
       </div>
+
     )
-  }
+  }//.
 
-  Test(){
+  kbRouter = ({ match }) => {
 
-    return(
-      <div>
-       
-      </div>
+    const url = [
+      { id:1,
+        url:match.url + "/GoAnywhere"},
+      {id:2,
+        url:match.url + "/Presto"},
+      {id:3,
+      url:match.url + "/Enforcive"},
+      {id:4,
+        url:match.url + "/Aldon"},
+      {id:5,
+        url:match.url + "/X-Analysis"} 
+    ]
+    const UrlConfirm = url.find( url => url.url = match.url + "/GoAnywhere"); 
+
+   
+    return <div>
+      {console.log(UrlConfirm)}
+      {url.map(url => 
+        <Route path={url.url} component={this.ItemKBPage} key={url.id}></Route>
+        )}
+     
+      
+    </div>
+  }//.
+
+
+  ItemKBPage = ({ match }) => {
+
+    return (
+      
+      <ItemKBPage></ItemKBPage>     
     )
   }//.
 
