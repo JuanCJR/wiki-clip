@@ -9,7 +9,8 @@ export default class KnowedgeBase extends Component {
 
     state = {
         items: ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
-        nroItem: 7
+        nroItem: 7,
+        linked: true
     }
 
 
@@ -52,17 +53,14 @@ export default class KnowedgeBase extends Component {
 
                         <Col className="p-0 m-0" style={{ width: "80rem", flexGrow: "0" }}>
 
-                            <ItemListKB
-                                nextItems={this.nextItems}
-                                beforeItems={this.beforeItems}
-                                items={this.state.items}
 
-                            ></ItemListKB>
+                            <this.prueba></this.prueba>
+
 
                         </Col>
                     </Row>
                 </Container>
-                </Card>
+            </Card>
 
         )
     }//.
@@ -109,11 +107,31 @@ export default class KnowedgeBase extends Component {
     ItemKBPage = ({ match }) => {
 
         return (
-            
-                
-                <ItemKBPage></ItemKBPage>
-           
+
+
+            <ItemKBPage></ItemKBPage>
+
         )
     }//.
+
+
+    prueba = () => {
+        return (
+            <div>
+                {this.state.linked ? (
+                
+                <ItemKBPage></ItemKBPage>
+                
+                ):(
+
+                <ItemListKB
+                    nextItems={this.nextItems}
+                    beforeItems={this.beforeItems}
+                    items={this.state.items}
+                    linked={this.state.linked}
+                ></ItemListKB>)}
+            </div>
+        )
+    }
 
 }

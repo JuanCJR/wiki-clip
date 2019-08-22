@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ItemKB from './ItemKB'
 import {Card, Table, Button, ButtonGroup} from 'react-bootstrap'
 
+
 export default class ItemListKB extends Component {
     
       
@@ -10,7 +11,7 @@ export default class ItemListKB extends Component {
         
         return (
            
-            <Card classname="p-0 m-0" style={{width:"73rem" }}>
+            <Card className="p-0 m-0" style={{width:"73rem" }}>
                                 
                                 <Table striped bordered hover>
                                     <thead>
@@ -42,7 +43,9 @@ export default class ItemListKB extends Component {
                                 </Card.Footer>
                             </Card>
         )
-    }
+    }//.
 
+
+   
     
 }

@@ -8,7 +8,7 @@ import KnowedgeBase from './components/KnowedgeBase/KnowedgeBase';
 import ItemKBPage from './components/KnowedgeBase/ItemKBPage'
 
 //importaciones de pruebas
-
+import Prueba from './test/test.js'
 
 class App extends Component {
 
@@ -28,6 +28,9 @@ class App extends Component {
         <Route path="/dashboard" component={this.Dashboard}></Route>
         <Route path="/KnowedgeBase" component={this.KB}></Route>
         <Route path="/KnowedgeBaseItem" component={this.kbRouter}></Route>
+
+
+        <Route path="/Prueba" component={this.Prueba}></Route>
             
              </div>
 
@@ -121,6 +124,12 @@ class App extends Component {
     )
   }//.
 
+  Prueba()
+  {
+    return(
+        <Prueba></Prueba>
+    )
+  }//.
 
 
 }

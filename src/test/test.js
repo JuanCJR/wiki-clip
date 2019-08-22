@@ -1,16 +1,29 @@
 import React, { Component } from 'react'
-import NavBar from '../NavBar'
 import Button from 'react-bootstrap/Button'
+import NavBar from '../components/NavBar'
 import Card from 'react-bootstrap/Card'
-export default class ItemKBPage extends Component {
+
+
+export default class test extends Component {
+
+    pruebaComponente =()=>{
+        return(
+            <NavBar></NavBar>
+        )
+            
+    }
+
+
     render() {
         return (
-            
+            <div>
+               
+                <this.pruebaComponente></this.pruebaComponente>
                 <Card>
                     <Card.Header>
                     
                         <h1>Several Fixes Available in GoAnywhere MFT 6.1.6
-                        <Button href="/KnowedgeBase" className="mb-1"style={{marginLeft:"22rem"}} variant="primary" >Volver</Button>
+                        <Button className="mb-1"style={{marginLeft:"22rem"}} variant="primary" >Volver</Button>
                         </h1>
                         
 
@@ -78,7 +91,7 @@ export default class ItemKBPage extends Component {
                     </Card.Body>
 
                 </Card>
-            
+            </div>
         )
     }
 }
