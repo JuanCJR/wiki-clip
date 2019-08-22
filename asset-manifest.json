@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wiki-clip/static/css/main.4fd25d6e.chunk.css",
-    "main.js": "/wiki-clip/static/js/main.e02aaa21.chunk.js",
-    "main.js.map": "/wiki-clip/static/js/main.e02aaa21.chunk.js.map",
+    "main.js": "/wiki-clip/static/js/main.e1a6d793.chunk.js",
+    "main.js.map": "/wiki-clip/static/js/main.e1a6d793.chunk.js.map",
     "runtime~main.js": "/wiki-clip/static/js/runtime~main.eb8dd91e.js",
     "runtime~main.js.map": "/wiki-clip/static/js/runtime~main.eb8dd91e.js.map",
-    "static/js/2.b299884f.chunk.js": "/wiki-clip/static/js/2.b299884f.chunk.js",
-    "static/js/2.b299884f.chunk.js.map": "/wiki-clip/static/js/2.b299884f.chunk.js.map",
+    "static/js/2.d8e504a7.chunk.js": "/wiki-clip/static/js/2.d8e504a7.chunk.js",
+    "static/js/2.d8e504a7.chunk.js.map": "/wiki-clip/static/js/2.d8e504a7.chunk.js.map",
     "index.html": "/wiki-clip/index.html",
-    "precache-manifest.c1c066db691257731413b37f979b8542.js": "/wiki-clip/precache-manifest.c1c066db691257731413b37f979b8542.js",
+    "precache-manifest.a70fefc70a8c4f78bc1d87e21c4bccb9.js": "/wiki-clip/precache-manifest.a70fefc70a8c4f78bc1d87e21c4bccb9.js",
     "service-worker.js": "/wiki-clip/service-worker.js",
     "static/css/main.4fd25d6e.chunk.css.map": "/wiki-clip/static/css/main.4fd25d6e.chunk.css.map"
   }
