@@ -26,6 +26,7 @@ export default class ItemListKB extends Component {
                                     renderFiveItems={this.props.renderFiveItems}
                                     items={this.props.items}
                                     nroItems={this.props.nroItems}
+                                    changeLinked={this.props.changeLinked}
                                     
                                     ></ItemKB>
                                     

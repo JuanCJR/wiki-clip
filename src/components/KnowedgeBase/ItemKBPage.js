@@ -6,11 +6,13 @@ export default class ItemKBPage extends Component {
     render() {
         return (
             
-                <Card>
+                <Card className="p-0 m-0" style={{width:"73rem" }}>
                     <Card.Header>
                     
                         <h1>Several Fixes Available in GoAnywhere MFT 6.1.6
-                        <Button href="/KnowedgeBase" className="mb-1"style={{marginLeft:"22rem"}} variant="primary" >Volver</Button>
+                        <Button 
+                        onClick={this.props.changeLinked}
+                        className="mb-1"style={{marginLeft:"7rem"}} variant="primary" >Volver</Button>
                         </h1>
                         
 

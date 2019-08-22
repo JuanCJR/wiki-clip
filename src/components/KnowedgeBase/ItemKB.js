@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import ItemKBPage from './ItemKBPage';
-
+import Button from 'react-bootstrap/Button'
 
 export default class ItemKB extends Component {
 
 
-    i = () =>{
-        return(
-            <ItemKBPage></ItemKBPage>
-        )
-    }
+   
 
     render() {
         
@@ -24,10 +20,11 @@ export default class ItemKB extends Component {
                     <tr key={items.id}>
                         
                         <td>
-                         
-                            
-                            <a                     
-                        href={`/knowedgeBaseItem/`+ items.Aplicativo + "#" + items.id}>{items.id}</a></td>
+                         <Button
+                         onClick={this.props.changeLinked} >
+                          {items.id}   
+                         </Button>
+                            </td>
                         <td>{items.Descripcion}</td>
                         <td>{items.Aplicativo}</td>
                                                

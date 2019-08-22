@@ -10,9 +10,15 @@ export default class KnowedgeBase extends Component {
     state = {
         items: ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
         nroItem: 7,
-        linked: true
-    }
+        linked: false
+    }//.
 
+    changeLinked = () => {
+        let newLinkedState = this.state.linked;
+        this.setState({
+            linked:newLinkedState =! newLinkedState
+        })
+    }//.
 
 
     nextItems = () => {
@@ -119,17 +125,18 @@ export default class KnowedgeBase extends Component {
         return (
             <div>
                 {this.state.linked ? (
-                
-                <ItemKBPage></ItemKBPage>
-                
-                ):(
 
-                <ItemListKB
-                    nextItems={this.nextItems}
-                    beforeItems={this.beforeItems}
-                    items={this.state.items}
-                    linked={this.state.linked}
-                ></ItemListKB>)}
+                    <ItemKBPage changeLinked={this.changeLinked}></ItemKBPage>
+
+                ) : (
+
+                        <ItemListKB
+                            nextItems={this.nextItems}
+                            beforeItems={this.beforeItems}
+                            items={this.state.items}
+                            linked={this.state.linked}
+                            changeLinked={this.changeLinked}
+                        ></ItemListKB>)}
             </div>
         )
     }
