@@ -7,8 +7,7 @@ export default class ItemListKB extends Component {
     
       
     render() {
-      
-        
+    
         return (
            
             <Card className="p-0 m-0" style={{width:"73rem" }}>

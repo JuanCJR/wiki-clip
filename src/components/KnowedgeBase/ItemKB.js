@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
-import ItemKBPage from './ItemKBPage';
 import Button from 'react-bootstrap/Button'
 
 export default class ItemKB extends Component {
-
-
-   
 
     render() {
         
@@ -21,7 +17,14 @@ export default class ItemKB extends Component {
                         
                         <td>
                          <Button
-                         onClick={this.props.changeLinked} >
+                         onClick={()=>{
+                            const changeLinked = this.props.changeLinked; 
+                            return(
+                                changeLinked(items.id)
+                             )
+                         }
+                            
+                         } >
                           {items.id}   
                          </Button>
                             </td>

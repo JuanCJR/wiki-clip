@@ -4,20 +4,23 @@ import { Route } from 'react-router-dom'
 import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap'
 import ItemListKB from './ItemListKB'
 import ItemKBPage from './ItemKBPage'
-import NavBar from '../NavBar'
 export default class KnowedgeBase extends Component {
 
     state = {
         items: ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
         nroItem: 7,
-        linked: false
+        linked: false,
+        actualItem:""
     }//.
 
-    changeLinked = () => {
+    changeLinked = (itemID) => {
+    
         let newLinkedState = this.state.linked;
         this.setState({
-            linked:newLinkedState =! newLinkedState
+            linked:newLinkedState =! newLinkedState,
+            actualItem:this.state.items.filter(items => items.id === itemID)
         })
+        
     }//.
 
 
@@ -60,7 +63,7 @@ export default class KnowedgeBase extends Component {
                         <Col className="p-0 m-0" style={{ width: "80rem", flexGrow: "0" }}>
 
 
-                            <this.prueba></this.prueba>
+                            <this.renderKB></this.renderKB>
 
 
                         </Col>
@@ -71,7 +74,7 @@ export default class KnowedgeBase extends Component {
         )
     }//.
 
-
+    /*
     kbRouter = ({ match }) => {
 
         const url = [
@@ -108,25 +111,17 @@ export default class KnowedgeBase extends Component {
 
         </div>
     }//.
+*/
 
 
-    ItemKBPage = ({ match }) => {
-
-        return (
-
-
-            <ItemKBPage></ItemKBPage>
-
-        )
-    }//.
-
-
-    prueba = () => {
+    renderKB = () => {
         return (
             <div>
                 {this.state.linked ? (
 
-                    <ItemKBPage changeLinked={this.changeLinked}></ItemKBPage>
+                    <ItemKBPage changeLinked={this.changeLinked}
+                                actualItem={this.state.actualItem}
+                    ></ItemKBPage>
 
                 ) : (
 
