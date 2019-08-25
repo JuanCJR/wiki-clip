@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import Dashboard from './components/Dashboard';
 import KnowedgeBase from './components/KnowedgeBase/KnowedgeBase';
 import ItemKBPage from './components/KnowedgeBase/ItemKBPage'
+import CreateKBItem from './components/KnowedgeBase/CreateKBItem'
 
 //importaciones de pruebas
 import Prueba from './test/test.js'
@@ -28,7 +29,7 @@ class App extends Component {
         <Route path="/dashboard" component={this.Dashboard}></Route>
         <Route path="/KnowedgeBase" component={this.KB}></Route>
         <Route path="/KnowedgeBaseItem" component={this.kbRouter}></Route>
-
+        <Route path="/CreateKBItem" component={this.CreateKBItem}></Route>
 
         <Route path="/Prueba" component={this.Prueba}></Route>
             
@@ -123,6 +124,12 @@ class App extends Component {
       <ItemKBPage></ItemKBPage>     
     )
   }//.
+
+  CreateKBItem = () =>{
+    return(
+        <CreateKBItem></CreateKBItem>
+    )
+}//.
 
   Prueba()
   {

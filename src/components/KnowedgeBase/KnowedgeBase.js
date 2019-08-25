@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import ItemBD from './itemBD.json'
 import { Route } from 'react-router-dom'
-import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap'
+import { Card, Container, Row, Col, ListGroup, Button } from 'react-bootstrap'
 import ItemListKB from './ItemListKB'
 import ItemKBPage from './ItemKBPage'
 import axios from 'axios';
+import CreateKBItem from './CreateKBItem'
 export default class KnowedgeBase extends Component {
 
     state = {
@@ -64,7 +65,11 @@ export default class KnowedgeBase extends Component {
             
             <Card className="">
                
-                <Card.Header><h1>Base de Conocimientos</h1></Card.Header>
+                <Card.Header><h1>Base de Conocimientos</h1>
+                
+                <a  href="/CreateKBItem" className ="btn btn-primary">Agregar Item</a>
+                </Card.Header>
+                
                 <Container className="m-0 p-0 mw-100" style={{ height: "30rem" }}>
                     <Row className="m-0 mw-100 " >
                         <Col className="p-0 m-0" style={{ width: "12rem", flexGrow: "0" }}>
@@ -154,6 +159,9 @@ export default class KnowedgeBase extends Component {
                         ></ItemListKB>)}
             </div>
         )
-    }
+    }//.
+
+    
+
 
 }
