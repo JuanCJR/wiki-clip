@@ -25,20 +25,21 @@ export default class ItemKBPage extends Component {
                     <Card.Subtitle className="text-muted mt-1  border-bottom">
 
                         <div className="border-bottom pl-4 pb-1">
-                            <h6>KB Articulo {actualItem.id}</h6>
+                            <h6>KB Articulo {actualItem._id}</h6>
                             <br />
-                            <h6 >22/08/2019</h6>
+                            <h6 >{actualItem.createdAt}</h6>
+                            <h6>Autor: {actualItem.Autor}</h6>
                         </div>
 
                         <div className=" pl-4 mt-1 pb-1">
                             <h6>Producto: {actualItem.Aplicativo}</h6>
                             <br/>
-                            <h6>Tipo:Actualizacion</h6>
+                            <h6>{actualItem.Tipo}</h6>
                         </div>
                     </Card.Subtitle>
                     <Card.Body>
                     
-                   {actualItem.Texto}
+                   {actualItem.Contenido}
 
                     </Card.Body>
 

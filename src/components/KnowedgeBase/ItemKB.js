@@ -10,7 +10,7 @@ export default class ItemKB extends Component {
                 
             <tbody>
                
-                {console.log(this.props.url)}
+                
                 {this.props.items.map(items =>
 
                     <tr key={items.id}>
@@ -20,7 +20,7 @@ export default class ItemKB extends Component {
                          onClick={()=>{
                             const changeLinked = this.props.changeLinked; 
                             return(
-                                changeLinked(items.id)
+                                changeLinked(items._id)
                              )
                          }
                             

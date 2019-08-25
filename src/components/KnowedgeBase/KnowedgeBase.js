@@ -4,37 +4,56 @@ import { Route } from 'react-router-dom'
 import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap'
 import ItemListKB from './ItemListKB'
 import ItemKBPage from './ItemKBPage'
+import axios from 'axios';
 export default class KnowedgeBase extends Component {
 
     state = {
-        items: ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
+        items:[], // ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
         nroItem: 7,
         linked: false,
-        actualItem:""
-    }//.
+        actualItem:{}
+    }//. 
+
+    async componentDidMount(){
+        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+        console.log(res.data[0]);
+
+        this.setState({
+            items: res.data.slice(0,[7])
+        })
+    }
 
     changeLinked = (itemID) => {
-    
-        let newLinkedState = this.state.linked;
+
+       let newLinkedState = this.state.linked;
+        
         this.setState({
             linked:newLinkedState =! newLinkedState,
-            actualItem:this.state.items.filter(items => items.id === itemID)
-        })
+            actualItem:this.state.items.filter(items => items._id === itemID)
+        });
+        
+        console.log(this.state.items.filter(items => items._id === itemID))
         
     }//.
 
 
-    nextItems = () => {
+    nextItems = async () => {
+
+        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+
         this.setState({
-            items: ItemBD.slice(this.state.nroItem, [this.state.nroItem + 7]),
+            items: res.data.slice(this.state.nroItem, [this.state.nroItem + 7]),
             nroItem: this.state.nroItem + 7
         })
 
     }
 
-    beforeItems = () => {
+    beforeItems =  async () => {
+
+        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+
         this.setState({
-            items: ItemBD.slice(this.state.nroItem - 7, [this.state.nroItem]),
+            items: res.data.slice(this.state.nroItem - 7, [this.state.nroItem]),
             nroItem: this.state.nroItem - 7
         })
     }
@@ -42,8 +61,9 @@ export default class KnowedgeBase extends Component {
 
     render() {
         return (
-
+            
             <Card className="">
+               
                 <Card.Header><h1>Base de Conocimientos</h1></Card.Header>
                 <Container className="m-0 p-0 mw-100" style={{ height: "30rem" }}>
                     <Row className="m-0 mw-100 " >
