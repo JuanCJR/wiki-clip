@@ -16,7 +16,7 @@ export default class KnowedgeBase extends Component {
     }//. 
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+        const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
         console.log(res.data[0]);
 
         this.setState({
@@ -40,7 +40,7 @@ export default class KnowedgeBase extends Component {
 
     nextItems = async () => {
 
-        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+        const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
 
         this.setState({
             items: res.data.slice(this.state.nroItem, [this.state.nroItem + 7]),
@@ -51,7 +51,7 @@ export default class KnowedgeBase extends Component {
 
     beforeItems =  async () => {
 
-        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+        const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
 
         this.setState({
             items: res.data.slice(this.state.nroItem - 7, [this.state.nroItem]),

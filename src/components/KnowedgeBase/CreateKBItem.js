@@ -50,7 +50,7 @@ export default class CreateKBItem extends Component {
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post('http://localhost:8080/api/KnowedgeBase', this.state);
+        const res = await axios.post('http://127.0.0.1:8080/api/KnowedgeBase', this.state);
         console.log(res);
 
 
