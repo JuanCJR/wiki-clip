@@ -16,7 +16,7 @@ export default class KnowedgeBase extends Component {
     }//. 
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:8080/api/KnowedgeBase');
+        const res = await axios.get('http://192.168.0.154:8080/api/KnowedgeBase');
         console.log(res.data[0]);
 
         this.setState({
