@@ -1,40 +1,49 @@
 import React, { Component } from 'react'
-import ItemBD from './itemBD.json'
-import { Route } from 'react-router-dom'
-import { Card, Container, Row, Col, ListGroup, Button } from 'react-bootstrap'
+
+import { Card, Container, Row, Col, ListGroup,Button } from 'react-bootstrap'
 import ItemListKB from './ItemListKB'
 import ItemKBPage from './ItemKBPage'
 import axios from 'axios';
-import CreateKBItem from './CreateKBItem'
+import CreateKBItem from './CreateKBItem';
 export default class KnowedgeBase extends Component {
 
     state = {
-        items:[], // ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
+        items: [], // ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
         nroItem: 7,
         linked: false,
-        actualItem:{}
+        Create: false,
+        actualItem: {}
     }//. 
 
-    async componentDidMount(){
+    async componentDidMount() {
         const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
         console.log(res.data[0]);
 
         this.setState({
-            items: res.data.slice(0,[7])
+            items: res.data.slice(0, [7])
         })
     }
 
+    changeCreateLink = () => {
+        let newCreateLinked = this.state.Create;
+        this.setState({
+            Create: newCreateLinked = !newCreateLinked,
+
+        });
+    }//.
+
     changeLinked = (itemID) => {
 
-       let newLinkedState = this.state.linked;
-        
+        let newLinkedState = this.state.linked;
+
         this.setState({
-            linked:newLinkedState =! newLinkedState,
-            actualItem:this.state.items.filter(items => items._id === itemID)
+            linked: newLinkedState = !newLinkedState,
+            actualItem: this.state.items.filter(items => items._id === itemID),
+
         });
-        
+
         console.log(this.state.items.filter(items => items._id === itemID))
-        
+
     }//.
 
 
@@ -49,7 +58,7 @@ export default class KnowedgeBase extends Component {
 
     }
 
-    beforeItems =  async () => {
+    beforeItems = async () => {
 
         const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
 
@@ -62,14 +71,16 @@ export default class KnowedgeBase extends Component {
 
     render() {
         return (
-            
+
             <Card className="">
-               
+
                 <Card.Header><h1>Base de Conocimientos</h1>
-                
-                <a  href="/CreateKBItem" className ="btn btn-primary">Agregar Item</a>
+                    <Button 
+                    variant="primary"
+                    onClick={this.changeCreateLink}>Agregar Item</Button>
+                   
                 </Card.Header>
-                
+
                 <Container className="m-0 p-0 mw-100" style={{ height: "30rem" }}>
                     <Row className="m-0 mw-100 " >
                         <Col className="p-0 m-0" style={{ width: "12rem", flexGrow: "0" }}>
@@ -88,7 +99,7 @@ export default class KnowedgeBase extends Component {
                         <Col className="p-0 m-0" style={{ width: "80rem", flexGrow: "0" }}>
 
 
-                            <this.renderKB></this.renderKB>
+                            <this.renderKB2></this.renderKB2>
 
 
                         </Col>
@@ -145,7 +156,7 @@ export default class KnowedgeBase extends Component {
                 {this.state.linked ? (
 
                     <ItemKBPage changeLinked={this.changeLinked}
-                                actualItem={this.state.actualItem}
+                        actualItem={this.state.actualItem}
                     ></ItemKBPage>
 
                 ) : (
@@ -161,7 +172,44 @@ export default class KnowedgeBase extends Component {
         )
     }//.
 
-    
+
+    renderKB2 = () => {
+        return (
+            <div>
+                {this.state.Create ? (
+                    <CreateKBItem
+                        Create={this.state.Create}
+                        changeCreateLink={this.changeCreateLink}
+                    ></CreateKBItem>)
+                    :
+
+                    (
+                        this.state.linked ? (
+                            <ItemKBPage changeLinked={this.changeLinked}
+                                actualItem={this.state.actualItem}
+                            ></ItemKBPage>
+
+                        ) : (
+                                <ItemListKB
+                                    nextItems={this.nextItems}
+                                    beforeItems={this.beforeItems}
+                                    items={this.state.items}
+                                    linked={this.state.linked}
+                                    changeLinked={this.changeLinked}
+                                ></ItemListKB>
+                            )
+
+                    )
+
+                }
+
+
+            </div>
+        )
+
+    }//.
+
+
 
 
 }

@@ -4,7 +4,10 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios'
 import NavBar from '../NavBar'
-import { Alert } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert'
+import { Link } from 'react-router-dom'
+
+
 export default class CreateKBItem extends Component {
 
     state = {
@@ -48,22 +51,29 @@ export default class CreateKBItem extends Component {
 
     }
 
+    genAlerta() {
+
+        return (
+            <Alert variant="primary">
+                Enviado
+
+             </Alert>
+        )
+    }
+
     onSubmit = async (e) => {
         e.preventDefault();
         const res = await axios.post('http://127.0.0.1:8080/api/KnowedgeBase', this.state);
-        console.log(res);
+        const state = res.data;
 
-
-
+       this.props.changeCreateLink();
+        
     }
 
 
     render() {
         return (
-            <div>
-                <NavBar></NavBar>
-                <Card className="pl-4 pr-4 pt-2" >
-
+                <Card  className="pl-3" style={{width:"73rem" }} >
 
                     <Form onSubmit={this.onSubmit}>
                         <Form.Group controlId="Aplicativo">
@@ -104,18 +114,17 @@ export default class CreateKBItem extends Component {
                             <Form.Label>Autor</Form.Label>
                             <Form.Control></Form.Control>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Enviar
-</Button>
-                        <Button  className="ml-4" href="/KnowedgeBase" variant="primary" type="link">
-                            Volver
+                        <Button type="submit">Enviar</Button>
+                        <Button className="ml-4"
+                                variant="primary" type="link">
+                                Volver
 </Button>
                     </Form>
                 </Card>
 
 
 
-            </div>
-        )
-    }
-}
+            
+                )
+            }
+        }
