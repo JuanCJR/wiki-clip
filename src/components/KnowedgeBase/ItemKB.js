@@ -5,18 +5,20 @@ export default class ItemKB extends Component {
 
     render() {
         
-        
+     
         return (
-                
+                 
             <tbody>
-               
                 
-                {this.props.items.map(items =>
-
-                    <tr key={items.id}>
-                        
-                        <td>
+                {
+                    this.props.items.map(items =>
+                       
+                    <tr key={items._id}>
+                       
+                        <td width="3px">
                          <Button
+                         className="p-2"
+                         variant="outline-info"
                          onClick={()=>{
                             const changeLinked = this.props.changeLinked; 
                             return(
@@ -25,7 +27,8 @@ export default class ItemKB extends Component {
                          }
                             
                          } >
-                          {items.id}   
+                            
+                          
                          </Button>
                             </td>
                         <td>{items.Descripcion}</td>
@@ -36,10 +39,6 @@ export default class ItemKB extends Component {
                 )}
 
             </tbody>
-
-            
-
-
 
 
         )

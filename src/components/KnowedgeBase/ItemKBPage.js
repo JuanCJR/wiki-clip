@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 export default class ItemKBPage extends Component {
    
     render() {
-        const actualItem = this.props.actualItem[0];
+        const actualItem = this.props.actualItem;
         console.log(actualItem);
         return (
             
@@ -13,7 +13,9 @@ export default class ItemKBPage extends Component {
                     
                         <h1>{actualItem.Descripcion}
                         <Button 
-                        onClick={this.props.changeLinked}
+                        onClick={()=>{
+                            this.props.changeLinked(actualItem._id)
+                        }}
                         className="mb-1"style={{marginLeft:"1rem"}} variant="primary" >Volver</Button>
                         </h1>
                         

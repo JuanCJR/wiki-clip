@@ -75,7 +75,9 @@ class App extends Component {
 
     return (
       <div>
+         
         <NavBar></NavBar>
+      
         <KnowedgeBase></KnowedgeBase>
 
         {/*<a href={`${match.url}/prueba`}

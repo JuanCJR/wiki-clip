@@ -12,11 +12,11 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className="">
-        <Container className="m-1 p-0" style={{flexGrow:"0", maxWidth:"98%"}}>
-          <Row>
+        <Container className="p-0" style={{flexGrow:"0", maxWidth:"97%"}}>
+          <Row >
             <Col style ={{flexGrow:"0"}}>
               {/* Contenedor de Aplicativos */}
-              <Card className="" style={{ marginTop: "25px", width: "25rem" }} bg="light" text="black" >
+              <Card className="" style={{ marginTop: "10px", width: "25rem" }} bg="light" text="black" >
                 <Card.Header>Aplicativos</Card.Header>
                 <Card.Body className="scrollbar text-center" id="style-1" style={{ height: "454px" }} >
 
@@ -35,7 +35,7 @@ export default class Dashboard extends Component {
               <Row>
                 <Col>
                   {/* Contenedor de Carrusel */}
-                  <Card className="mr-0 ml-0" bg="light" text="dark" style={{ marginTop: "25px", heigth: "11rem", width: "30rem" }}>
+                  <Card className="mr-0 ml-0" bg="light" text="dark" style={{ marginTop: "10px", heigth: "11rem", width: "30rem" }}>
                     <Card.Header>Avances de Laboratorio</Card.Header>
 
                     <Card.Body>
@@ -92,7 +92,7 @@ export default class Dashboard extends Component {
                   {/*Servidores*/}
                   <Card bg="light" 
                   className="mr-1 ml-1"
-                  text="dark" style={{ marginTop: "25px", width: "23rem"}}>
+                  text="dark" style={{ marginTop: "10px", width: "23rem"}}>
                     <Card.Header>Servidores</Card.Header>
                     <Card.Body className="scrollbar text-center" id="style-1" style={{height:"15rem" }} >
 

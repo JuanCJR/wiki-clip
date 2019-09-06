@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { Navbar, NavDropdown, Nav,Form,FormControl, Button } from 'react-bootstrap';
-
+import Image from 'react-bootstrap/Image';
 export default class NavBar extends Component {
     render() {
         return (
             <Navbar bg="light" variant="light" expand="lg">
                 <Navbar.Brand href="/">
-                <img
-                src="/img/logo-clip.png"
-                width="70"
-                height="50"
-                alt="React Boostrap logo"
-                className="d-inline-block align-center">
-                </img>
                 
+                <Image
+                width="70"
+                height="55"
+                alt="React Boostrap logo"
+                className="d-inline-block align-center mr-3 pb-1"
+                style={{backgroundColor:"rgba(245, 245, 245, 1)"}} 
+                src="/img/logo-clip.png" rounded />
                <strong>Wiki-Clip</strong> 
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

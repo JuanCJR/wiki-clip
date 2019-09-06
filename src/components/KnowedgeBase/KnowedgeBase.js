@@ -1,28 +1,43 @@
 import React, { Component } from 'react'
 
-import { Card, Container, Row, Col, ListGroup,Button } from 'react-bootstrap'
+import { Card, Container, Row, Col, ListGroup, Button } from 'react-bootstrap'
 import ItemListKB from './ItemListKB'
 import ItemKBPage from './ItemKBPage'
 import axios from 'axios';
 import CreateKBItem from './CreateKBItem';
+
+
 export default class KnowedgeBase extends Component {
 
     state = {
         items: [], // ItemBD.slice(0, [7]), //ItemBD.filter(ItemBD => ItemBD.id < 8 && ItemBD.id >0),
+        page: 1,
         nroItem: 7,
         linked: false,
         Create: false,
-        actualItem: {}
+        actualItem: {},
+        pageState: "Home"
+
     }//. 
 
+
+    //OK
+    getData = async (page, nro) => {
+
+        let res = await axios.get('http://localhost:8080/api/KnowedgeBase/' + page + "/page/to/" + nro);
+        return res.data;
+    }
+
+    //OK
     async componentDidMount() {
-        const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
-        console.log(res.data[0]);
+
+        const data = await this.getData("Home", 1);
+
 
         this.setState({
-            items: res.data.slice(0, [7])
+            items: data
         })
-    }
+    }//.
 
     changeCreateLink = () => {
         let newCreateLinked = this.state.Create;
@@ -32,53 +47,93 @@ export default class KnowedgeBase extends Component {
         });
     }//.
 
-    changeLinked = (itemID) => {
+    changeLinked = async (itemID) => {
 
         let newLinkedState = this.state.linked;
-
+        let item = await axios.get("http://localhost:8080/api/knowedgeBase/" + itemID);
         this.setState({
             linked: newLinkedState = !newLinkedState,
-            actualItem: this.state.items.filter(items => items._id === itemID),
+            actualItem: item.data,
 
         });
 
-        console.log(this.state.items.filter(items => items._id === itemID))
+    }//.
+
+    //OK
+    nextItems = async () => {
+        let data;
+
+        if (this.state.items.length < 6) {
+
+            this.setState({
+                items: this.state.items,
+                page: this.state.page
+            })
+        } else {
+
+            data = await this.getData(this.state.pageState, this.state.page++);
+            this.setState({
+                items: data,
+                page: this.state.page++
+            })
+        }
 
     }//.
 
-
-    nextItems = async () => {
-
-        const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
-
-        this.setState({
-            items: res.data.slice(this.state.nroItem, [this.state.nroItem + 7]),
-            nroItem: this.state.nroItem + 7
-        })
-
-    }
-
+    //OK
     beforeItems = async () => {
+        let nro;
+        let data;
 
-        const res = await axios.get('http://127.0.0.1:8080/api/KnowedgeBase');
+        if (this.state.page <= 1) {
+            this.setState({
+                items: this.state.items,
+                page: this.state.page
+            })
 
+        } else {
+            nro = this.state.page - 1;
+            data = await this.getData(this.state.pageState, nro);
+            console.log(data);
+
+            this.setState({
+                items: data,
+                page: nro
+            })
+        }
+
+    }//.
+
+    refreshData = async () => {
         this.setState({
-            items: res.data.slice(this.state.nroItem - 7, [this.state.nroItem]),
-            nroItem: this.state.nroItem - 7
+            items: await this.getData("Home", 1),
+            page: 1,
+            pageState: "Home"
         })
+
     }
 
+
+    filterItems = async name => {
+
+        let data = await this.getData(name, 1);
+
+        this.setState({
+            items: data,
+            pageState: name,
+            page: 1
+        });
+
+    }//
 
     render() {
         return (
+            <Card className="p-0 m-0" style={{}}>
 
-            <Card className="">
-
-                <Card.Header><h1>Base de Conocimientos</h1>
-                    <Button 
-                    variant="primary"
-                    onClick={this.changeCreateLink}>Agregar Item</Button>
-                   
+                <Card.Header className="pb-5"><h1>Base de Conocimientos</h1>
+                    <Button style={{ position: "absolute" }}
+                        variant="info"
+                        onClick={this.changeCreateLink}>Agregar Item</Button>
                 </Card.Header>
 
                 <Container className="m-0 p-0 mw-100" style={{ height: "30rem" }}>
@@ -86,11 +141,55 @@ export default class KnowedgeBase extends Component {
                         <Col className="p-0 m-0" style={{ width: "12rem", flexGrow: "0" }}>
                             <Card className="m-0 p-0" style={{ width: "11rem", height: "100%" }}>
                                 <ListGroup>
-                                    <ListGroup.Item><a href="/">Aldon</a></ListGroup.Item>
-                                    <ListGroup.Item><a href="/">Enforcive</a></ListGroup.Item>
-                                    <ListGroup.Item><a href="/">Presto</a></ListGroup.Item>
-                                    <ListGroup.Item><a href="/">GoAnywhere</a></ListGroup.Item>
-                                    <ListGroup.Item><a href="/">X-Analysis</a></ListGroup.Item>
+                                    <ListGroup.Item className="p-0">
+                                        <Button
+                                            variant="outline-info"
+                                            style={{ width: "100%", border:"0"}}
+                                            onClick={() => {
+                                                this.filterItems("Aldon")
+                                            }}
+
+                                        >Aldon</Button></ListGroup.Item>
+                                    <ListGroup.Item className="p-0">
+                                        <Button
+                                            variant="outline-info"
+                                            style={{ width: "100%",border:"0" }}
+                                            onClick={() => {
+                                                this.filterItems("Enforcive")
+                                            }}
+                                        >
+                                            Enforcive
+                                    </Button>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item className="p-0"> <Button
+                                        variant="outline-info"
+                                        style={{ width: "100%",border:"0" }}
+                                        onClick={() => {
+                                            this.filterItems("Presto")
+                                        }}
+                                    >
+                                        Presto
+                                    </Button></ListGroup.Item>
+                                    <ListGroup.Item className="p-0"> <Button
+                                        variant="outline-info"
+                                        style={{ width: "100%",border:"0" }}
+                                        onClick={() => {
+                                            this.filterItems("GoAnywhere")
+                                        }}
+                                    >
+                                        GoAnywhere
+                                    </Button></ListGroup.Item>
+                                    <ListGroup.Item
+                                    className="p-0"
+                                    > <Button
+                                        variant="outline-info"
+                                        style={{ width: "100%",border:"0" }}
+                                        onClick={() => {
+                                            this.filterItems("X-Analysis")
+                                        }}
+                                    >
+                                        X-Analysis
+                                    </Button></ListGroup.Item>
 
                                 </ListGroup>
                             </Card>
@@ -172,7 +271,7 @@ export default class KnowedgeBase extends Component {
         )
     }//.
 
-
+    //En uso
     renderKB2 = () => {
         return (
             <div>
@@ -180,6 +279,7 @@ export default class KnowedgeBase extends Component {
                     <CreateKBItem
                         Create={this.state.Create}
                         changeCreateLink={this.changeCreateLink}
+                        refreshData={this.refreshData}
                     ></CreateKBItem>)
                     :
 
@@ -192,6 +292,7 @@ export default class KnowedgeBase extends Component {
                         ) : (
                                 <ItemListKB
                                     nextItems={this.nextItems}
+
                                     beforeItems={this.beforeItems}
                                     items={this.state.items}
                                     linked={this.state.linked}
