@@ -5,6 +5,7 @@ import ItemListKB from './ItemListKB'
 import ItemKBPage from './ItemKBPage'
 import axios from 'axios';
 import CreateKBItem from './CreateKBItem';
+import NavBar from '../NavBar';
 
 
 export default class KnowedgeBase extends Component {
@@ -16,11 +17,17 @@ export default class KnowedgeBase extends Component {
         linked: false,
         Create: false,
         actualItem: {},
-        pageState: "Home"
-
+        pageState: "Home",
+        
     }//. 
 
 
+    runSearch = (items,)=>{
+        this.setState({
+            items:items,
+            page:1
+        })
+    }
     //OK
     getData = async (page, nro) => {
 
@@ -35,7 +42,8 @@ export default class KnowedgeBase extends Component {
 
 
         this.setState({
-            items: data
+            items: data,
+            
         })
     }//.
 
@@ -69,7 +77,8 @@ export default class KnowedgeBase extends Component {
                 items: this.state.items,
                 page: this.state.page
             })
-        } else {
+        }      
+        else {
 
             data = await this.getData(this.state.pageState, this.state.page++);
             this.setState({
@@ -128,6 +137,8 @@ export default class KnowedgeBase extends Component {
 
     render() {
         return (
+            <div>
+            <NavBar runSearch={this.runSearch}></NavBar>
             <Card className="p-0 m-0" style={{}}>
 
                 <Card.Header className="pb-5"><h1>Base de Conocimientos</h1>
@@ -205,7 +216,7 @@ export default class KnowedgeBase extends Component {
                     </Row>
                 </Container>
             </Card>
-
+            </div>
         )
     }//.
 

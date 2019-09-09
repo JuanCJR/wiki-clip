@@ -1,8 +1,31 @@
 import React, { Component } from 'react'
 import { Navbar, NavDropdown, Nav,Form,FormControl, Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
+import axios from 'axios'
 export default class NavBar extends Component {
+    state={
+        Search:""
+    }
+
+
+    onChangeSearch = (e)=>{
+        this.setState({
+            Search:e.target.value
+        });
+    }//.
+
+    
+    onSubmit = async (e) =>{
+
+        e.preventDefault();
+       const result = await axios.post('http://localhost:8080/api/KnowedgeBase/search',this.state);            
+       await this.props.runSearch(result.data);
+    }//
+    
+    
     render() {
+
+     
         return (
             <Navbar bg="light" variant="light" expand="lg">
                 <Navbar.Brand href="/">
@@ -36,9 +59,10 @@ export default class NavBar extends Component {
                            <Nav.Link href="/KnowedgeBase">Base de Conocimientos</Nav.Link>
                 
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Buscar" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                    <Form inline onSubmit={this.onSubmit}>
+                        <FormControl
+                        onChange={this.onChangeSearch} type="text" placeholder="Buscar" className="mr-sm-2" />
+                        <Button type="submit" variant="outline-success">Buscar</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
